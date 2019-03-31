@@ -1,4 +1,4 @@
-output: main.o util.o lex.yy.o -ll
+output: main.o util.o lex.yy.o
 	gcc main.o util.o lex.yy.o -o output -ll
 main.o: main.c globals.h
 	gcc -c main.c
