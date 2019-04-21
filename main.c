@@ -2,14 +2,22 @@
 #include"globals.h"
 #include"lexscan.h"
 #include"util.h"
+#include"parse.h"
 
 FILE *source;
 FILE *outputfile;
 
+int scannerOutput=FALSE;
+static int parserOutput=FALSE;
 int lineno=0;
 
-int main(int argc){
-	source=fopen("sample.tiny","r");
+int Err=TRUE;
+
+int main(int argc,char* argv){
+	TreeNode *tree;
+	source=fopen("sample2.tiny","r");
+	int opt;
+	scanf("%d",&opt);
 	outputfile=stdout;
 	if(source==NULL){
 		printf("Error opening file : SAMPLE.TINY\n");
@@ -17,9 +25,15 @@ int main(int argc){
 	}
 	fprintf(outputfile,"\nTINY COMPILATION:\n");
 	TokenType tt;
-	do{
-		tt=getToken();
-		//printf("%d",tt);
-	}while(tt!=EndFile);
+	if(opt==0){
+		scannerOutput=TRUE;
+	}
+	else if(opt==1){
+		parserOutput=TRUE;
+	}
+	tree=parse();
+	if(parserOutput){
+		printTree(tree);		
+	}
 	return 0;
 }

@@ -1916,8 +1916,10 @@ TokenType getToken(void){
   }
   currentToken = yylex();
   strncpy(tokenString,yytext,40);
-  fprintf(outputfile,"\t%d: ",lineno);
-  printToken(currentToken,tokenString);
+  if(scannerOutput){
+    fprintf(outputfile,"\t%d: ",lineno);
+    printToken(currentToken,tokenString);
+  }
   return currentToken;
 }
 
